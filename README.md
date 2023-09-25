@@ -1,7 +1,7 @@
 # three-phase-inv-c2000
 
 ## Topology
-![image](https://github.com/unifi-consortium/three-phase-inv-c2000/assets/117390647/fd9eceb5-9b19-4a01-93fe-be1bec0c8221)
+![3phinv2](https://github.com/unifi-consortium/three-phase-inv-c2000/assets/117390647/c835fee3-3d8b-46de-b70d-43b30ba937f0)
 
 ## Hardware design
 + Three phase 2 level, Vdc =400 V, Vac = 120V line-neutral rms LCL filter 
