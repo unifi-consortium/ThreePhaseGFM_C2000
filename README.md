@@ -4,7 +4,7 @@
 ![image](https://github.com/unifi-consortium/three-phase-inv-c2000/assets/117390647/ab51cb53-7587-4a68-805e-de860a87cb03)
 
 ## Hardware design
-+ Three phase 2 level, Vdc =400 V, Vac = 120V line-neutral rms LCL filter 
++ Three phase 2 level, Vdc =400 V, Vac = 120 V line-neutral rms (208 V line-line) LCL filter 
 + Switched with SiC devices and designed for 100 kHz switching
 ![3_phase_board_fig](https://github.com/unifi-consortium/three-phase-inv-c2000/assets/117390647/3a36e519-630a-4050-8421-31b0a1dbe0f2)
 
