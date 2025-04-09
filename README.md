@@ -1,4 +1,4 @@
-# three-phase-inv-c2000
+# ThreePhaseGFM_C2000
 
 ## Topology
 ![3PhInv4png](https://github.com/unifi-consortium/three-phase-inv-c2000/assets/117390647/d84dceee-4ed1-4035-8424-cd716fe81151)
