@@ -60,7 +60,7 @@ void InitEPwm1(float freq)
     EPwm1Regs.ETSEL.bit.INTEN  = 1;              // Enable INT
  //   EPwm1Regs.ETPS.bit.SOCAPRD  = ET_3RD;         // Generate INT on every event
     EPwm1Regs.ETPS.bit.SOCPSSEL = 1;
-    EPwm1Regs.ETSOCPS.bit.SOCAPRD2 = 0x5;
+    EPwm1Regs.ETSOCPS.bit.SOCAPRD2 = 0x3;
 }
 
 //

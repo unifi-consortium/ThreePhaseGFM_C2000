@@ -1,0 +1,10 @@
+# Ignore build artifacts
+CPU1_RAM/
+CPU1_FLASH/
+Debug/
+Release/
+
+# Ignore generated IDE folders
+.launches/
+.config/
+.xdchelp
