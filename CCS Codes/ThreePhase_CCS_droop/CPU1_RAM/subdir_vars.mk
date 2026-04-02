@@ -9,22 +9,25 @@ LIB_SRCS += \
 ../SFO_v8_fpu_lib_build_c28.lib 
 
 ASM_SRCS += \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_CodeStartBranch.asm \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_usDelay.asm 
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_CodeStartBranch.asm \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_usDelay.asm 
 
 C_SRCS += \
 ../DLOG_4CH_F_MVAC.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_Adc.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_DefaultISR.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_Adc.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_DefaultISR.c \
 ../F2837xD_EPwm.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/headers/source/F2837xD_GlobalVariableDefs.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_Gpio.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_PieCtrl.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_PieVect.c \
-C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_SysCtrl.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/headers/source/F2837xD_GlobalVariableDefs.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_Gpio.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_PieCtrl.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_PieVect.c \
+C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_SysCtrl.c \
 ../PIR.c \
-../can.c \
+../dac_setup.c \
 ../ePWM.c \
+../inverter_init.c \
+../inverter_isr.c \
+../main.c \
 ../myADC.c 
 
 C_DEPS += \
@@ -38,8 +41,11 @@ C_DEPS += \
 ./F2837xD_PieVect.d \
 ./F2837xD_SysCtrl.d \
 ./PIR.d \
-./can.d \
+./dac_setup.d \
 ./ePWM.d \
+./inverter_init.d \
+./inverter_isr.d \
+./main.d \
 ./myADC.d 
 
 OBJS += \
@@ -55,8 +61,11 @@ OBJS += \
 ./F2837xD_SysCtrl.obj \
 ./F2837xD_usDelay.obj \
 ./PIR.obj \
-./can.obj \
+./dac_setup.obj \
 ./ePWM.obj \
+./inverter_init.obj \
+./inverter_isr.obj \
+./main.obj \
 ./myADC.obj 
 
 ASM_DEPS += \
@@ -76,8 +85,11 @@ OBJS__QUOTED += \
 "F2837xD_SysCtrl.obj" \
 "F2837xD_usDelay.obj" \
 "PIR.obj" \
-"can.obj" \
+"dac_setup.obj" \
 "ePWM.obj" \
+"inverter_init.obj" \
+"inverter_isr.obj" \
+"main.obj" \
 "myADC.obj" 
 
 C_DEPS__QUOTED += \
@@ -91,8 +103,11 @@ C_DEPS__QUOTED += \
 "F2837xD_PieVect.d" \
 "F2837xD_SysCtrl.d" \
 "PIR.d" \
-"can.d" \
+"dac_setup.d" \
 "ePWM.d" \
+"inverter_init.d" \
+"inverter_isr.d" \
+"main.d" \
 "myADC.d" 
 
 ASM_DEPS__QUOTED += \
@@ -101,21 +116,24 @@ ASM_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../DLOG_4CH_F_MVAC.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_Adc.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_DefaultISR.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_Adc.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_DefaultISR.c" \
 "../F2837xD_EPwm.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/headers/source/F2837xD_GlobalVariableDefs.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_Gpio.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_PieCtrl.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_PieVect.c" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_SysCtrl.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/headers/source/F2837xD_GlobalVariableDefs.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_Gpio.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_PieCtrl.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_PieVect.c" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_SysCtrl.c" \
 "../PIR.c" \
-"../can.c" \
+"../dac_setup.c" \
 "../ePWM.c" \
+"../inverter_init.c" \
+"../inverter_isr.c" \
+"../main.c" \
 "../myADC.c" 
 
 ASM_SRCS__QUOTED += \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_CodeStartBranch.asm" \
-"C:/ti/C2000Ware_3_03_00_00_Software/device_support/f2837xd/common/source/F2837xD_usDelay.asm" 
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_CodeStartBranch.asm" \
+"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/source/F2837xD_usDelay.asm" 
 
 

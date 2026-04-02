@@ -10,11 +10,14 @@
 "./F2837xD_SysCtrl.obj"
 "./F2837xD_usDelay.obj"
 "./PIR.obj"
-"./can.obj"
+"./dac_setup.obj"
 "./ePWM.obj"
+"./inverter_init.obj"
+"./inverter_isr.obj"
+"./main.obj"
 "./myADC.obj"
 "../SFO_v8_fpu_lib_build_c28.lib"
+-l"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/common/cmd/2837xD_RAM_lnk_cpu1.cmd"
 -lrts2800_fpu32.lib
--l2837xD_RAM_lnk_cpu1.cmd
--lF2837xD_Headers_nonBIOS_cpu1.cmd
+-l"C:/ti/C2000Ware_5_04_00_00/device_support/f2837xd/headers/cmd/F2837xD_Headers_BIOS_cpu1.cmd"
 -llibc.a
