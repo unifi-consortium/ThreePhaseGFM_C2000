@@ -67,7 +67,7 @@
 
 #define BW_cur          (2 * PI * 6000)
 #define BW_vol          (2 * PI * 1000)
-#define BW_LPF          (62.8319)
+#define BW_LPF          (2 * PI * 10)
 
 #define PWM_CH          3
 #define DAC_LOW_VAL     800
