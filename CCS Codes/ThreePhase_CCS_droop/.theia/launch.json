@@ -1,0 +1,21 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ThreePhase_CCS_droop",
+      "type": "ccs-debug",
+      "request": "launch",
+      "projectInfo": {
+        "name": "ThreePhase_CCS_droop",
+        "resourceId": "/ThreePhase_CCS_droop"
+      },
+      "launchSettings": {
+        "coresToLoadForProjectLaunch": [
+          "C28xx_CPU1"
+        ]
+      }
+    }
+  ]
+}

@@ -33,13 +33,13 @@
 
 // --- Outer Voltage Loop Architecture ---
 //#define OUTER_LOOP_NO_CC_FF
-//#define OUTER_LOOP_BOTH_CC_FF
+// #define OUTER_LOOP_BOTH_CC_FF
 #define OUTER_LOOP_ONLY_CC
 
 // --- Inner Current Loop (or Single Loop) Architecture ---
 #define INNER_LOOP_A_BOTH_CC_FF_VDCNOM
 //#define INNER_LOOP_B_CC_W_NOM_VDC
-//#define INNER_LOOP_C_CC_W_DROOP_VDCNOM
+// #define INNER_LOOP_C_CC_W_DROOP_VDCNOM
 //#define INNER_LOOP_D_NO_CC_FF_VDCNOM
 //#define INNER_LOOP_E_BOTH_CC_FF_RF_VDCNOM
 //#define INNER_LOOP_SINGLE_LOOP_F_VDCNOM
@@ -65,13 +65,13 @@
 #define Rf              0.059
 #define ALPHA           (2.0 * PI / 3.0)
 
-#define BW_cur          (2 * PI * 6000)
-#define BW_vol          (2 * PI * 1000)
+#define BW_cur          (2 * PI * 2000)
+#define BW_vol          (2 * PI * 400)
 #define BW_LPF          (2 * PI * 10)
 
 #define PWM_CH          3
-#define DAC_LOW_VAL     800
-#define DAC_HIGH_VAL    3200
+#define DAC_LOW_VAL     200
+#define DAC_HIGH_VAL    3896
 
 // ADC Scaling Multipliers
 #define VDC_SCALAR      (415.0 * 3.0 * 0.9769)
@@ -124,7 +124,7 @@ extern float offset_Idc;
 extern PARK INV_CURRENT_p, CAP_VOLTAGE_p, GRID_CURRENT_p, GRID_VOLTAGE_p;
 
 extern MinMaxLimit MinMax_id, MinMax_iq, MinMax_vd, MinMax_vq;
-extern LPF LPF_P, LPF_Q, LPF_Vd;
+extern LPF LPF_P, LPF_Q, LPF_Vd, LPF_IgD, LPF_IgQ;
 extern Compensator_PI pi_id, pi_iq, pi_vd, pi_vq;
 extern SVGEN svgen1;
 

@@ -9,6 +9,8 @@
 // GLOBAL VARIABLE DEFINITIONS
 //===========================================================================
 float Vnom_meas;
+float Igrid_filt_D, Igrid_filt_Q;
+
 float I_max = 15.0, I_maxSAT = 15.0, mod_max = 0.9, P_REF_MAX = 100.0, Rv = 30.0;
 float P_REF = 0.0, Q_REF = 0.0, K1 = 0.998, K2 = 0.001999;
 int HALF_TBPRD_inv = 0, OffsetCalCounter = 0;
@@ -41,7 +43,7 @@ float offset_Idc = 0.0;
 PARK INV_CURRENT_p, CAP_VOLTAGE_p, GRID_CURRENT_p, GRID_VOLTAGE_p;
 
 MinMaxLimit MinMax_id, MinMax_iq, MinMax_vd, MinMax_vq;
-LPF LPF_P, LPF_Q, LPF_Vd;
+LPF LPF_P, LPF_Q, LPF_Vd, LPF_IgD, LPF_IgQ;
 Compensator_PI pi_id, pi_iq, pi_vd, pi_vq;
 SVGEN svgen1 = SVGEN_DEFAULTS;
 
@@ -54,15 +56,15 @@ static inline void UpdateSystemFlagsAndDAC(void) {
     GpioDataRegs.GPBDAT.bit.GPIO36 = 1; 
     GpioDataRegs.GPBDAT.bit.GPIO35 = (RELAY == 1 ? 1 : 0);
 
-
-    if((user_flag == 1) && (prev_flag == 0)) {
-        P_REF_MAX = 125;
-        DacaRegs.DACVALS.all = DAC_HIGH_VAL;
-    }
-    else if((user_flag == 0) && (prev_flag == 1)) {
-        DacaRegs.DACVALS.all = DAC_LOW_VAL; 
-    }
-    prev_flag = user_flag;
+    DacaRegs.DACVALS.all = P * (DAC_HIGH_VAL-DAC_LOW_VAL)/1000 + 1024;
+    // if((user_flag == 1) && (prev_flag == 0)) {
+    //     P_REF_MAX = 125;
+    //     DacaRegs.DACVALS.all = DAC_HIGH_VAL;
+    // }
+    // else if((user_flag == 0) && (prev_flag == 1)) {
+    //     DacaRegs.DACVALS.all = DAC_LOW_VAL; 
+    // }
+    // prev_flag = user_flag;
 }
 
 static inline void ReadAndScaleMeasurements(void) {
@@ -148,13 +150,17 @@ static inline void ExecuteDroopControl(void) {
     VQ_REF = 0.0;
 }
 
+
+
 static inline void ExecuteOuterVoltageLoop(void) {
+    Igrid_filt_D = LPFCalculation(GRID_CURRENT_p.Ds, &LPF_IgD);
+    Igrid_filt_Q = LPFCalculation(GRID_CURRENT_p.Qs, &LPF_IgQ);
 #ifdef OUTER_LOOP_NO_CC_FF
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, 0.0);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, 0.0);
 #elif defined(OUTER_LOOP_BOTH_CC_FF)
-    ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs + GRID_CURRENT_p.Ds);
-    IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds + GRID_CURRENT_p.Qs);
+    ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs + 1*Igrid_filt_D);
+    IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds + 1*Igrid_filt_Q);
 #elif defined(OUTER_LOOP_ONLY_CC)
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds);
