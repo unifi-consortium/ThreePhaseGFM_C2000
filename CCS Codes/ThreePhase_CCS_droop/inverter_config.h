@@ -37,9 +37,9 @@
 #define OUTER_LOOP_ONLY_CC
 
 // --- Inner Current Loop (or Single Loop) Architecture ---
-#define INNER_LOOP_A_BOTH_CC_FF_VDCNOM
-//#define INNER_LOOP_B_CC_W_NOM_VDC
-// #define INNER_LOOP_C_CC_W_DROOP_VDCNOM
+// #define INNER_LOOP_A_BOTH_CC_FF_VDCNOM
+// #define INNER_LOOP_B_CC_W_NOM_VDC
+#define INNER_LOOP_C_CC_W_DROOP_VDCNOM
 //#define INNER_LOOP_D_NO_CC_FF_VDCNOM
 //#define INNER_LOOP_E_BOTH_CC_FF_RF_VDCNOM
 //#define INNER_LOOP_SINGLE_LOOP_F_VDCNOM

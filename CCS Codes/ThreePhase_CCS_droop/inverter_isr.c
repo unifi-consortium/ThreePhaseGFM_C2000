@@ -11,7 +11,7 @@
 float Vnom_meas;
 float Igrid_filt_D, Igrid_filt_Q;
 
-float I_max = 15.0, I_maxSAT = 15.0, mod_max = 0.9, P_REF_MAX = 100.0, Rv = 30.0;
+float I_max = 15.0, I_maxSAT = 15.0, mod_max = 0.9, P_REF_MAX = 50.0, Rv = 30.0;
 float P_REF = 0.0, Q_REF = 0.0, K1 = 0.998, K2 = 0.001999;
 int HALF_TBPRD_inv = 0, OffsetCalCounter = 0;
 
