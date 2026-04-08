@@ -32,19 +32,16 @@
 //#define PQ_CALC_NO_INNER
 
 // --- Outer Voltage Loop Architecture ---
-//#define OUTER_LOOP_NO_CC_FF
-#define OUTER_LOOP_BOTH_CC_FF
-// #define OUTER_LOOP_ONLY_CC
+//#define OUTER_LOOP_NONE
+#define OUTER_LOOP_CC_FF
+// #define OUTER_LOOP_CC
 
 // --- Inner Current Loop (or Single Loop) Architecture ---
-// #define INNER_LOOP_A_BOTH_CC_FF_VDCNOM
-#define INNER_LOOP_CC_FF_V0_VDCNOM
-// #define INNER_LOOP_B_CC_W_NOM_VDC
-// #define INNER_LOOP_C_CC_W_DROOP_VDCNOM
-//#define INNER_LOOP_D_NO_CC_FF_VDCNOM
-//#define INNER_LOOP_E_BOTH_CC_FF_RF_VDCNOM
-//#define INNER_LOOP_SINGLE_LOOP_F_VDCNOM
-//#define INNER_LOOP_SINGLE_LOOP_G_VDC
+//#define INNER_LOOP_CC_FF
+#define INNER_LOOP_CC_FF_V0
+//#define INNER_LOOP_CC
+//#define INNER_LOOP_NONE
+//#define INNER_LOOP_SINGLE_LOOP
 
 //===========================================================================
 // DEFINES & CONSTANTS

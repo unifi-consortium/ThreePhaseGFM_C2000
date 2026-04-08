@@ -155,13 +155,13 @@ static inline void ExecuteDroopControl(void) {
 static inline void ExecuteOuterVoltageLoop(void) {
     Igrid_filt_D = LPFCalculation(GRID_CURRENT_p.Ds, &LPF_IgD);
     Igrid_filt_Q = LPFCalculation(GRID_CURRENT_p.Qs, &LPF_IgQ);
-#ifdef OUTER_LOOP_NO_CC_FF
+#ifdef OUTER_LOOP_NONE
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, 0.0);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, 0.0);
-#elif defined(OUTER_LOOP_BOTH_CC_FF)
+#elif defined(OUTER_LOOP_CC_FF)
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs + P/(1.5*V_droop));
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds + Q/(1.5*V_droop));
-#elif defined(OUTER_LOOP_ONLY_CC)
+#elif defined(OUTER_LOOP_CC)
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds);
 #endif
