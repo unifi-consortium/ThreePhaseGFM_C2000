@@ -11,7 +11,7 @@
 float Vnom_meas;
 float Igrid_filt_D, Igrid_filt_Q;
 
-float I_max = 15.0, I_maxSAT = 15.0, mod_max = 0.9, P_REF_MAX = 50.0, Rv = 30.0;
+float I_max = 15.0, I_maxSAT = 15.0, mod_max = 0.9, P_REF_MAX = 100.0, Rv = 30.0;
 float P_REF = 0.0, Q_REF = 0.0, K1 = 0.998, K2 = 0.001999;
 int HALF_TBPRD_inv = 0, OffsetCalCounter = 0;
 
@@ -159,8 +159,8 @@ static inline void ExecuteOuterVoltageLoop(void) {
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, 0.0);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, 0.0);
 #elif defined(OUTER_LOOP_BOTH_CC_FF)
-    ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs + 1*Igrid_filt_D);
-    IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds + 1*Igrid_filt_Q);
+    ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs + P/(1.5*V_droop));
+    IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds + Q/(1.5*V_droop));
 #elif defined(OUTER_LOOP_ONLY_CC)
     ID_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Ds, VD_REF, &pi_vd, -omega_droop[1]*C*CAP_VOLTAGE_p.Qs);
     IQ_REF = CompensatorCalculation_PI(CAP_VOLTAGE_p.Qs, VQ_REF, &pi_vq, omega_droop[1]*C*CAP_VOLTAGE_p.Ds);
@@ -176,26 +176,20 @@ static inline void ExecuteOuterVoltageLoop(void) {
 }
 
 static inline void ExecuteInnerCurrentLoop(void) {
-#ifdef INNER_LOOP_A_BOTH_CC_FF_VDCNOM
+#ifdef INNER_LOOP_CC_FF
     Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, -omega_droop[1]*L*INV_CURRENT_p.Qs + CAP_VOLTAGE_p.Ds)) / (0.5*Vdcnom);
     Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, omega_droop[1]*L*INV_CURRENT_p.Ds + CAP_VOLTAGE_p.Qs)) / (0.5*Vdcnom);
-#elif defined(INNER_LOOP_B_CC_W_NOM_VDC)
-    Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, -omega_nom*L*INV_CURRENT_p.Qs)) / (0.5*Vdc);
-    Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, omega_nom*L*INV_CURRENT_p.Ds)) / (0.5*Vdc);
-#elif defined(INNER_LOOP_C_CC_W_DROOP_VDCNOM)
+#elif defined(INNER_LOOP_CC_FF_V0)
+    Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, -omega_droop[1]*L*INV_CURRENT_p.Qs + V_droop)) / (0.5*Vdcnom);
+    Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, omega_droop[1]*L*INV_CURRENT_p.Ds + 0)) / (0.5*Vdcnom);
+#elif defined(INNER_LOOP_CC)
     Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, -omega_droop[1]*L*INV_CURRENT_p.Qs)) / (0.5*Vdcnom);
     Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, omega_droop[1]*L*INV_CURRENT_p.Ds)) / (0.5*Vdcnom);
-#elif defined(INNER_LOOP_D_NO_CC_FF_VDCNOM)
+#elif defined(INNER_LOOP_NONE)
     Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, 0.0)) / (0.5*Vdcnom);
     Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, 0.0)) / (0.5*Vdcnom);
-#elif defined(INNER_LOOP_E_BOTH_CC_FF_RF_VDCNOM)
-    Vmod_d = (CompensatorCalculation_PI(INV_CURRENT_p.Ds, ID_REF, &pi_id, -omega_nom*L*INV_CURRENT_p.Qs + CAP_VOLTAGE_p.Ds + Rf*INV_CURRENT_p.Ds)) / (0.5*Vdcnom);
-    Vmod_q = (CompensatorCalculation_PI(INV_CURRENT_p.Qs, IQ_REF, &pi_iq, omega_nom*L*INV_CURRENT_p.Ds + CAP_VOLTAGE_p.Qs + Rf*INV_CURRENT_p.Qs)) / (0.5*Vdcnom);
-#elif defined(INNER_LOOP_SINGLE_LOOP_F_VDCNOM)
+#elif defined(INNER_LOOP_SINGLE_LOOP)
     Vmod_d = (V_droop) / (0.5*Vdcnom);
-    Vmod_q = 0.0;
-#elif defined(INNER_LOOP_SINGLE_LOOP_G_VDC)
-    Vmod_d = (V_droop) / (0.5*Vdc);
     Vmod_q = 0.0;
 #endif
 }

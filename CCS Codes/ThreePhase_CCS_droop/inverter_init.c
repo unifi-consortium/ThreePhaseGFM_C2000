@@ -69,10 +69,10 @@ void InitializeControlParameters(void)
     pi_vq = InitiateCompensator_PI(Tsamp, 1.414*BW_vol*C, BW_vol*C*BW_vol, 1000/(BW_vol*C*BW_vol), MinMax_vq);
 #elif defined(CUSTOM)
     // Dhruv Design Gains
-    pi_id = InitiateCompensator_PI(Tsamp, 1.414*BW_cur*L - Rf, 1*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_id);
-    pi_iq = InitiateCompensator_PI(Tsamp, 1.414*BW_cur*L - Rf, 1*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_iq);
-    pi_vd = InitiateCompensator_PI(Tsamp, 1.414*BW_vol*C, 1*BW_vol*C*BW_vol, 10000/(BW_vol*C*BW_vol), MinMax_vd);
-    pi_vq = InitiateCompensator_PI(Tsamp, 1.414*BW_vol*C, 1*BW_vol*C*BW_vol, 10000/(BW_vol*C*BW_vol), MinMax_vq);
+    pi_id = InitiateCompensator_PI(Tsamp, 2*BW_cur*L - Rf, 1*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_id);
+    pi_iq = InitiateCompensator_PI(Tsamp, 2*BW_cur*L - Rf, 1*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_iq);
+    pi_vd = InitiateCompensator_PI(Tsamp, 2*BW_vol*C, 1*BW_vol*C*BW_vol, 10000/(BW_vol*C*BW_vol), MinMax_vd);
+    pi_vq = InitiateCompensator_PI(Tsamp, 2*BW_vol*C, 1*BW_vol*C*BW_vol, 10000/(BW_vol*C*BW_vol), MinMax_vq);
 #endif
 }
 
