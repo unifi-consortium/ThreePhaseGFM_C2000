@@ -10,4 +10,5 @@
 	<templateProperties value="id=com.ti.common.project.core.emptyProjectTemplate,"/>
 	<isTargetManual value="false"/>
 	<origin value="C:/Users/jptol/workspace_v12/ThreePhaseDOEGFM_NewInverter_droop_reformat"/>
+	<activeTargetConfiguration value="targetConfigs/TMS320F28377D.ccxml"/>
 </projectOptions>
