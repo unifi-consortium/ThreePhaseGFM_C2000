@@ -49,26 +49,26 @@ void InitializeControlParameters(void)
 
     
 
-#ifdef GAINS_WORKING
-    // Working Gains
+#ifdef GAINS_ORIGINAL
+    // The gains used to conduct reference design experiments pre-2024
     pi_id = InitiateCompensator_PI(Tsamp, BW_cur*L, 0.4*BW_cur*L*BW_cur, 1000/(0.4*BW_cur*L*BW_cur), MinMax_id);
     pi_iq = InitiateCompensator_PI(Tsamp, BW_cur*L, 0.4*BW_cur*L*BW_cur, 1000/(0.4*BW_cur*L*BW_cur), MinMax_iq);
     pi_vd = InitiateCompensator_PI(Tsamp, BW_vol*C, 0.4*BW_vol*C*BW_vol, 1000/(0.4*BW_vol*C*BW_vol), MinMax_vd);
     pi_vq = InitiateCompensator_PI(Tsamp, BW_vol*C, 0.4*BW_vol*C*BW_vol, 1000/(0.4*BW_vol*C*BW_vol), MinMax_vq);
-#elif defined(GAINS_REF)
-    // Ref Design Gains
+#elif defined(GAINS_REF_DESIGN)
+    // The gains explicitly given in the reference designs
     pi_id = InitiateCompensator_PI(Tsamp, BW_cur*L, BW_cur*Rf, 1000/(BW_cur*Rf), MinMax_id);
     pi_iq = InitiateCompensator_PI(Tsamp, BW_cur*L, BW_cur*Rf, 1000/(BW_cur*Rf), MinMax_iq);
     pi_vd = InitiateCompensator_PI(Tsamp, BW_vol*C, BW_vol*C*BW_vol*BW_vol/BW_cur, 1000/(BW_vol*C*BW_vol*BW_vol/BW_cur), MinMax_vd);
     pi_vq = InitiateCompensator_PI(Tsamp, BW_vol*C, BW_vol*C*BW_vol*BW_vol/BW_cur, 1000/(BW_vol*C*BW_vol*BW_vol/BW_cur), MinMax_vq);
 #elif defined(GAINS_DHRUV)
-    // Dhruv Design Gains
+    // Gains calculated for optimal second order response
     pi_id = InitiateCompensator_PI(Tsamp, 2*BW_cur*L - Rf, BW_cur*BW_cur*L, 1000/(BW_cur*BW_cur*L), MinMax_id);
     pi_iq = InitiateCompensator_PI(Tsamp, 2*BW_cur*L - Rf, BW_cur*BW_cur*L, 1000/(BW_cur*BW_cur*L), MinMax_iq);
     pi_vd = InitiateCompensator_PI(Tsamp, 1.414*BW_vol*C, BW_vol*C*BW_vol, 1000/(BW_vol*C*BW_vol), MinMax_vd);
     pi_vq = InitiateCompensator_PI(Tsamp, 1.414*BW_vol*C, BW_vol*C*BW_vol, 1000/(BW_vol*C*BW_vol), MinMax_vq);
-#elif defined(CUSTOM)
-    // Dhruv Design Gains
+#elif defined(GAINS_DHRUV_NEW)
+    // Gains calculated to reject noise
     pi_id = InitiateCompensator_PI(Tsamp, 1.0*BW_cur*L - Rf, 1.0*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_id);
     pi_iq = InitiateCompensator_PI(Tsamp, 1.0*BW_cur*L - Rf, 1.0*BW_cur*BW_cur*L, 10000/(BW_cur*BW_cur*L), MinMax_iq);
     pi_vd = InitiateCompensator_PI(Tsamp, 1.0*BW_vol*C, 1.0*BW_vol*C*BW_vol, 10000/(BW_vol*C*BW_vol), MinMax_vd);

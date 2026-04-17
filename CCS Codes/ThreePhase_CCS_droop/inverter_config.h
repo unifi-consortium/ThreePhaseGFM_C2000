@@ -21,12 +21,13 @@
 //===========================================================================
 
 // --- Controller Gains Tuning ---
-//#define GAINS_WORKING
-//#define GAINS_REF
-//#define GAINS_DHRUV
-#define CUSTOM
+// #define GAINS_ORIGINAL
+// #define GAINS_REF_DESIGN
+// #define GAINS_DHRUV
+#define GAINS_DHRUV_NEW
 
 // --- P and Q Calculation Method ---
+<<<<<<< HEAD
 //#define PQ_CALC_NO_LPF
 #define PQ_CALC_INNER_LOOPS
 //#define PQ_CALC_NO_INNER
@@ -42,6 +43,23 @@
 //#define INNER_LOOP_CC
 #define INNER_LOOP_NONE
 //#define INNER_LOOP_SINGLE_LOOP
+=======
+// #define PQ_CALC_NO_LPF
+#define PQ_CALC_INNER_LOOPS
+// #define PQ_CALC_NO_INNER
+
+// --- Outer Voltage Loop Architecture ---
+// #define OUTER_LOOP_NONE
+#define OUTER_LOOP_CC_FF
+// #define OUTER_LOOP_CC
+
+// --- Inner Current Loop (or Single Loop) Architecture ---
+// #define INNER_LOOP_CC_FF
+#define INNER_LOOP_CC_FF_V0
+// #define INNER_LOOP_CC
+// #define INNER_LOOP_NONE
+// #define INNER_LOOP_SINGLE_LOOP
+>>>>>>> 0400ca3f2f0c2f4e62a95450d7677f056c3bea12
 
 //===========================================================================
 // DEFINES & CONSTANTS
