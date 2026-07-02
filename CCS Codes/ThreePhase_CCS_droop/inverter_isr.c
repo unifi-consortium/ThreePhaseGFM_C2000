@@ -232,7 +232,7 @@ interrupt void adca1_isr(void)
     UpdateSystemFlagsAndDAC();
     ReadAndScaleMeasurements();
     CalculateActiveReactivePower();
-    if (fabs(P) > 1000.0f || fabs(Q) > 1000.0f) {
+    if (fabs(P) > 2000.0f || fabs(Q) > 2000.0f) {
          RELAY = 0;
     }
     ExecuteDroopControl();
