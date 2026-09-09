@@ -29,8 +29,8 @@
 // --- P and Q Calculation Method ---
 
 //#define PQ_CALC_NO_LPF
-#define PQ_CALC_INNER_LOOPS
-//#define PQ_CALC_NO_INNER
+// #define PQ_CALC_INNER_LOOPS
+#define PQ_CALC_NO_INNER
 
 // --- Outer Voltage Loop Architecture ---
 #define OUTER_LOOP_NONE
@@ -41,8 +41,8 @@
 //#define INNER_LOOP_CC_FF
 //#define INNER_LOOP_CC_FF_V0
 //#define INNER_LOOP_CC
-#define INNER_LOOP_NONE
-//#define INNER_LOOP_SINGLE_LOOP
+// #define INNER_LOOP_NONE
+#define INNER_LOOP_SINGLE_LOOP
 
 //===========================================================================
 // DEFINES & CONSTANTS
